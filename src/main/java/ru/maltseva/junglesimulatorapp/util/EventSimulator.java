@@ -125,7 +125,7 @@ public class EventSimulator {
     private void fightLeon(Panther panther) {
         int health = panther.getHealth();
         int energy = panther.getEnergy();
-        String fightResult = "";
+        String fightResult;
         int i = (int) (Math.random() * 100);
         if (i <= 50) {
             energy = energy - 8;
@@ -189,11 +189,7 @@ public class EventSimulator {
     }
 
     private boolean checkStatus(Panther panther) {
-        if (panther.getHealth() <= 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return panther.getHealth() > 0;
     }
 
     private void checkEnergy(Panther panther) {
