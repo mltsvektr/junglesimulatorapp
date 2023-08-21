@@ -6,13 +6,35 @@ public class EventSimulator {
     public void startSimulation(Panther panther) {
         while (checkStatus(panther)) {
             int num = (int) (Math.random() * 100);
+            if (num >= 0 && num < 20) {
+                sleepEvent(panther);
+            } else if (num >= 20 && num < 30) {
+                eatAntelope(panther);
+            } else if (num >= 30 && num < 40) {
+                eatBuffalo(panther);
+            } else if (num >= 40 && num < 50) {
+                hideEvent(panther);
+            } else if (num >= 50 && num < 60) {
+                runEvent(panther);
+            } else if (num >= 60 && num < 65) {
+                fightLeon(panther);
+            } else if (num >= 65 && num < 75) {
+                huntEvent(panther);
+            } else if (num >= 75 && num < 85) {
+                hunterAttack(panther);
+            } else if (num >= 85 && num < 90) {
+                careKitten(panther);
+            } else if (num >= 90 && num <= 100) {
+                teachEvent(panther);
+            }
         }
+        System.out.println("О, нет! Пантера умерла!");
 
     }
 
     private void sleepEvent(Panther panther) {
         int energy = panther.getEnergy();
-        energy = energy + 20;
+        energy = energy + 30;
         if (energy > 100) {
             energy = 100;
         }
@@ -30,7 +52,7 @@ public class EventSimulator {
         }
         panther.setEnergy(energy);
         checkEnergy(panther);
-        System.out.println("Пантера пробежала! Текущая энергия: " + " " +
+        System.out.println("Пантера пробежала! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
@@ -42,7 +64,7 @@ public class EventSimulator {
         }
         panther.setEnergy(energy);
         checkEnergy(panther);
-        System.out.println("Пантера вышла на охоту! Текущая энергия: " + " " +
+        System.out.println("Пантера вышла на охоту! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
@@ -120,7 +142,7 @@ public class EventSimulator {
             if (energy < 0) {
                 energy = 0;
             }
-            fightResult = "ООО нет! Лев укусил пантеру!";
+            fightResult = "О, нет! Лев укусил пантеру!";
         }
         panther.setEnergy(energy);
         panther.setHealth(health);
@@ -130,7 +152,7 @@ public class EventSimulator {
                 "Текущее здоровье: " + panther.getHealth());
     }
 
-    private void hideEvent(Panther panther){
+    private void hideEvent(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy - 4;
         if (energy < 0) {
@@ -138,11 +160,11 @@ public class EventSimulator {
         }
         panther.setEnergy(energy);
         checkEnergy(panther);
-        System.out.println("Пантера спрятала добычу! Текущая энергия: " + " " +
+        System.out.println("Пантера спрятала добычу! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
-    private void careKitten(Panther panther){
+    private void careKitten(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy - 2;
         if (energy < 0) {
@@ -150,11 +172,11 @@ public class EventSimulator {
         }
         panther.setEnergy(energy);
         checkEnergy(panther);
-        System.out.println("Пантера заботилась о своих детёнышах! Текущая энергия: " + " " +
+        System.out.println("Пантера заботилась о своих детёнышах! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
-    private void teachEvent(Panther panther){
+    private void teachEvent(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy - 2;
         if (energy < 0) {
@@ -162,7 +184,7 @@ public class EventSimulator {
         }
         panther.setEnergy(energy);
         checkEnergy(panther);
-        System.out.println("Пантера учила своих детёнышей охотиться! Текущая энергия: " + " " +
+        System.out.println("Пантера учила своих детёнышей охотиться! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
