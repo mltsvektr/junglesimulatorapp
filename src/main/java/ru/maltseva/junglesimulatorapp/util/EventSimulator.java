@@ -5,7 +5,7 @@ import ru.maltseva.junglesimulatorapp.model.Panther;
 public class EventSimulator {
     public void startSimulation(Panther panther) {
         while (checkStatus(panther)) {
-            int num = (int) Math.random() * 100;
+            int num = (int) (Math.random() * 100);
         }
 
     }
@@ -22,18 +22,6 @@ public class EventSimulator {
                 "Текущее здоровье: " + panther.getHealth());
     }
 
-    private void walkEvent(Panther panther) {
-        int energy = panther.getEnergy();
-        energy = energy - 3;
-        if (energy < 0) {
-            energy = 0;
-        }
-        panther.setEnergy(energy);
-        checkEnergy(panther);
-        System.out.println("Пантера пошла на прогулку!  Текущая энергия: " + " " +
-                "Текущее здоровье: " + panther.getHealth());
-    }
-
     private void runEvent(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy - 7;
@@ -43,6 +31,18 @@ public class EventSimulator {
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера пробежала! Текущая энергия: " + " " +
+                "Текущее здоровье: " + panther.getHealth());
+    }
+
+    private void huntEvent(Panther panther) {
+        int energy = panther.getEnergy();
+        energy = energy - 10;
+        if (energy < 0) {
+            energy = 0;
+        }
+        panther.setEnergy(energy);
+        checkEnergy(panther);
+        System.out.println("Пантера вышла на охоту! Текущая энергия: " + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
@@ -97,6 +97,72 @@ public class EventSimulator {
         panther.setHealth(health);
         checkEnergy(panther);
         System.out.println("На пантеру напал охотник! Текущая энергия: " + panther.getEnergy() +
+                "Текущее здоровье: " + panther.getHealth());
+    }
+
+    private void fightLeon(Panther panther) {
+        int health = panther.getHealth();
+        int energy = panther.getEnergy();
+        String fightResult = "";
+        int i = (int) (Math.random() * 100);
+        if (i <= 50) {
+            energy = energy - 8;
+            if (energy < 0) {
+                energy = 0;
+            }
+            fightResult = "Пантера победила!";
+        } else {
+            health = health - 8;
+            if (health < 0) {
+                health = 0;
+            }
+            energy = energy - 8;
+            if (energy < 0) {
+                energy = 0;
+            }
+            fightResult = "ООО нет! Лев укусил пантеру!";
+        }
+        panther.setEnergy(energy);
+        panther.setHealth(health);
+        checkEnergy(panther);
+        System.out.println("Пантера сражалась со львом. Результат битвы: " + fightResult + " " +
+                "Текущая энергия: " + panther.getEnergy() + " " +
+                "Текущее здоровье: " + panther.getHealth());
+    }
+
+    private void hideEvent(Panther panther){
+        int energy = panther.getEnergy();
+        energy = energy - 4;
+        if (energy < 0) {
+            energy = 0;
+        }
+        panther.setEnergy(energy);
+        checkEnergy(panther);
+        System.out.println("Пантера спрятала добычу! Текущая энергия: " + " " +
+                "Текущее здоровье: " + panther.getHealth());
+    }
+
+    private void careKitten(Panther panther){
+        int energy = panther.getEnergy();
+        energy = energy - 2;
+        if (energy < 0) {
+            energy = 0;
+        }
+        panther.setEnergy(energy);
+        checkEnergy(panther);
+        System.out.println("Пантера заботилась о своих детёнышах! Текущая энергия: " + " " +
+                "Текущее здоровье: " + panther.getHealth());
+    }
+
+    private void teachEvent(Panther panther){
+        int energy = panther.getEnergy();
+        energy = energy - 2;
+        if (energy < 0) {
+            energy = 0;
+        }
+        panther.setEnergy(energy);
+        checkEnergy(panther);
+        System.out.println("Пантера учила своих детёнышей охотиться! Текущая энергия: " + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
