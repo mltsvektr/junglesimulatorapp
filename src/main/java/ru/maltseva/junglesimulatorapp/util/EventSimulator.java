@@ -35,9 +35,7 @@ public class EventSimulator {
     private void sleepEvent(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy + 30;
-        if (energy > 100) {
-            energy = 100;
-        }
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера поспала! Энергия восстановилась. Текущая энергия: " + panther.getEnergy() + " " +
@@ -46,10 +44,8 @@ public class EventSimulator {
 
     private void runEvent(Panther panther) {
         int energy = panther.getEnergy();
-        energy = energy - 7;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = energy - 10;
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера пробежала! Текущая энергия: " + panther.getEnergy() + " " +
@@ -58,10 +54,8 @@ public class EventSimulator {
 
     private void huntEvent(Panther panther) {
         int energy = panther.getEnergy();
-        energy = energy - 10;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = energy - 15;
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера вышла на охоту! Текущая энергия: " + panther.getEnergy() + " " +
@@ -72,13 +66,9 @@ public class EventSimulator {
         int health = panther.getHealth();
         int energy = panther.getEnergy();
         health = health + (int) (panther.getFANGS() * 3);
-        if (health > 100) {
-            health = 100;
-        }
+        health = EventSimulator.checkRangeHealth(health);
         energy = energy - 6;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         panther.setHealth(health);
         checkEnergy(panther);
@@ -90,13 +80,9 @@ public class EventSimulator {
         int health = panther.getHealth();
         int energy = panther.getEnergy();
         health = health + (int) (panther.getFANGS() * 5);
-        if (health > 100) {
-            health = 100;
-        }
+        health = EventSimulator.checkRangeHealth(health);
         energy = energy - 8;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         panther.setHealth(health);
         checkEnergy(panther);
@@ -108,17 +94,13 @@ public class EventSimulator {
         int health = panther.getHealth();
         int energy = panther.getEnergy();
         health = health - 10;
-        if (health < 0) {
-            health = 0;
-        }
-        energy = energy - 8;
-        if (energy < 0) {
-            energy = 0;
-        }
+        health = EventSimulator.checkRangeHealth(health);
+        energy = energy - 10;
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         panther.setHealth(health);
         checkEnergy(panther);
-        System.out.println("На пантеру напал охотник! Текущая энергия: " + panther.getEnergy() +
+        System.out.println("На пантеру напал охотник! Текущая энергия: " + panther.getEnergy() + " " +
                 "Текущее здоровье: " + panther.getHealth());
     }
 
@@ -129,19 +111,13 @@ public class EventSimulator {
         int i = (int) (Math.random() * 100);
         if (i <= 50) {
             energy = energy - 8;
-            if (energy < 0) {
-                energy = 0;
-            }
+            energy = EventSimulator.checkRangeEnergy(energy);
             fightResult = "Пантера победила!";
         } else {
             health = health - 8;
-            if (health < 0) {
-                health = 0;
-            }
-            energy = energy - 8;
-            if (energy < 0) {
-                energy = 0;
-            }
+            health = EventSimulator.checkRangeHealth(health);
+            energy = energy - 10;
+            energy = EventSimulator.checkRangeEnergy(energy);
             fightResult = "О, нет! Лев укусил пантеру!";
         }
         panther.setEnergy(energy);
@@ -155,9 +131,7 @@ public class EventSimulator {
     private void hideEvent(Panther panther) {
         int energy = panther.getEnergy();
         energy = energy - 4;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера спрятала добычу! Текущая энергия: " + panther.getEnergy() + " " +
@@ -166,10 +140,8 @@ public class EventSimulator {
 
     private void careKitten(Panther panther) {
         int energy = panther.getEnergy();
-        energy = energy - 2;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = energy - 3;
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера заботилась о своих детёнышах! Текущая энергия: " + panther.getEnergy() + " " +
@@ -178,10 +150,8 @@ public class EventSimulator {
 
     private void teachEvent(Panther panther) {
         int energy = panther.getEnergy();
-        energy = energy - 2;
-        if (energy < 0) {
-            energy = 0;
-        }
+        energy = energy - 5;
+        energy = EventSimulator.checkRangeEnergy(energy);
         panther.setEnergy(energy);
         checkEnergy(panther);
         System.out.println("Пантера учила своих детёнышей охотиться! Текущая энергия: " + panther.getEnergy() + " " +
@@ -196,11 +166,28 @@ public class EventSimulator {
         int health = panther.getHealth();
         if (panther.getEnergy() <= 0) {
             health = health - 5;
-            if (health < 0) {
-                health = 0;
-            }
+            health = EventSimulator.checkRangeHealth(health);
             panther.setHealth(health);
         }
     }
 
+    private static int checkRangeEnergy(int energy) {
+        if (energy > 100) {
+            return 100;
+        } else if (energy < 0) {
+            return 0;
+        } else {
+            return energy;
+        }
+    }
+
+    private static int checkRangeHealth(int health) {
+        if (health > 100) {
+            return 100;
+        } else if (health < 0) {
+            return 0;
+        } else {
+            return health;
+        }
+    }
 }
