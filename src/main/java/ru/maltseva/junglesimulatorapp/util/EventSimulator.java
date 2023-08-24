@@ -6,30 +6,34 @@ public class EventSimulator {
     public void startSimulation(Panther panther) {
         while (checkStatus(panther)) {
             int num = (int) (Math.random() * 100);
-            if (num >= 0 && num < 20) {
-                sleepEvent(panther);
-            } else if (num >= 20 && num < 30) {
-                eatAntelope(panther);
-            } else if (num >= 30 && num < 40) {
-                eatBuffalo(panther);
-            } else if (num >= 40 && num < 50) {
-                hideEvent(panther);
-            } else if (num >= 50 && num < 60) {
-                runEvent(panther);
-            } else if (num >= 60 && num < 65) {
-                fightLeon(panther);
-            } else if (num >= 65 && num < 75) {
-                huntEvent(panther);
-            } else if (num >= 75 && num < 85) {
-                hunterAttack(panther);
-            } else if (num >= 85 && num < 90) {
-                careKitten(panther);
-            } else if (num >= 90 && num <= 100) {
-                teachEvent(panther);
+            try {
+                Thread.sleep(1500);
+                if (num >= 0 && num < 20) {
+                    sleepEvent(panther);
+                } else if (num >= 20 && num < 30) {
+                    eatAntelope(panther);
+                } else if (num >= 30 && num < 40) {
+                    eatBuffalo(panther);
+                } else if (num >= 40 && num < 50) {
+                    hideEvent(panther);
+                } else if (num >= 50 && num < 60) {
+                    runEvent(panther);
+                } else if (num >= 60 && num < 65) {
+                    fightLeon(panther);
+                } else if (num >= 65 && num < 75) {
+                    huntEvent(panther);
+                } else if (num >= 75 && num < 85) {
+                    hunterAttack(panther);
+                } else if (num >= 85 && num < 90) {
+                    careKitten(panther);
+                } else if (num >= 90 && num <= 100) {
+                    teachEvent(panther);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException();
             }
         }
         System.out.println("О, нет! Пантера умерла!");
-
     }
 
     private void sleepEvent(Panther panther) {
@@ -163,8 +167,8 @@ public class EventSimulator {
     }
 
     private void checkEnergy(Panther panther) {
-        int health = panther.getHealth();
         if (panther.getEnergy() <= 0) {
+            int health = panther.getHealth();
             health = health - 5;
             health = EventSimulator.checkRangeHealth(health);
             panther.setHealth(health);
@@ -173,21 +177,19 @@ public class EventSimulator {
 
     private static int checkRangeEnergy(int energy) {
         if (energy > 100) {
-            return 100;
+            energy = 100;
         } else if (energy < 0) {
-            return 0;
-        } else {
-            return energy;
+            energy = 0;
         }
+        return energy;
     }
 
     private static int checkRangeHealth(int health) {
         if (health > 100) {
-            return 100;
+            health = 100;
         } else if (health < 0) {
-            return 0;
-        } else {
-            return health;
+            health = 0;
         }
+        return health;
     }
 }
