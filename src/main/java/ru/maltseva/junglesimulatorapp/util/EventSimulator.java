@@ -6,29 +6,29 @@ public class EventSimulator {
     public void startSimulation(Panther panther) {
         while (checkStatus(panther)) {
             int num = (int) (Math.random() * 100);
+            if (num >= 0 && num < 20) {
+                sleepEvent(panther);
+            } else if (num >= 20 && num < 30) {
+                eatAntelope(panther);
+            } else if (num >= 30 && num < 40) {
+                eatBuffalo(panther);
+            } else if (num >= 40 && num < 50) {
+                hideEvent(panther);
+            } else if (num >= 50 && num < 60) {
+                runEvent(panther);
+            } else if (num >= 60 && num < 65) {
+                fightLeon(panther);
+            } else if (num >= 65 && num < 75) {
+                huntEvent(panther);
+            } else if (num >= 75 && num < 85) {
+                hunterAttack(panther);
+            } else if (num >= 85 && num < 90) {
+                careKitten(panther);
+            } else if (num >= 90 && num <= 100) {
+                teachEvent(panther);
+            }
             try {
                 Thread.sleep(1500);
-                if (num >= 0 && num < 20) {
-                    sleepEvent(panther);
-                } else if (num >= 20 && num < 30) {
-                    eatAntelope(panther);
-                } else if (num >= 30 && num < 40) {
-                    eatBuffalo(panther);
-                } else if (num >= 40 && num < 50) {
-                    hideEvent(panther);
-                } else if (num >= 50 && num < 60) {
-                    runEvent(panther);
-                } else if (num >= 60 && num < 65) {
-                    fightLeon(panther);
-                } else if (num >= 65 && num < 75) {
-                    huntEvent(panther);
-                } else if (num >= 75 && num < 85) {
-                    hunterAttack(panther);
-                } else if (num >= 85 && num < 90) {
-                    careKitten(panther);
-                } else if (num >= 90 && num <= 100) {
-                    teachEvent(panther);
-                }
             } catch (Exception e) {
                 throw new RuntimeException();
             }
